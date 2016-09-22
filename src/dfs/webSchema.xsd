@@ -1,107 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" 
-targetNamespace="http://www.example.org/webSchema" 
-xmlns:tns="http://www.example.org/webSchema" 
-elementFormDefault="qualified"> 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
 
-<element name = "display-name" type = "string"/>
+<xsd:element name="display-name" type="xsd:string" />
 
+<xsd:element name="welcome-file-list">
+	
+        <xsd:complexType>
+			<xsd:sequence>
+			<xsd:element name="welcome-file" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+</xsd:element>
 
-<element name = "welcome-file-list">
-	<complexType>
-			<sequence>
-			<element name = "welcome-file" type = "string" minOccurs="1" maxOccurs="unbounded"/>
-			</sequence>
-	</complexType>
-</element>
+<xsd:element name="filter">
+	
+        <xsd:complexType>
+			<xsd:sequence>
+			<xsd:element ref="filter-name" /> 
+			<xsd:element name="filter-class" type="xsd:string" />
+			<xsd:element ref="init-param" maxOccurs="unbounded" /> 
+			</xsd:sequence>
+		</xsd:complexType>
+</xsd:element>
 
-<element name = "filter">
-	<complexType>
-			<sequence>
-			<element ref = "tns:filter-name"/> 
-			<element name = "filter-class" type = "string"/>
-			<element ref = "tns:init-param" maxOccurs="unbounded"/> 
-			</sequence>
-	</complexType>
-</element>
+<xsd:element name="filter-mapping">
+	
+        <xsd:complexType>
+			<xsd:sequence>
+			<xsd:element ref="filter-name" /> 
+			<xsd:element name="url-pattern" type="xsd:string" />
+			<xsd:element name="dispatcher" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+</xsd:element>
 
-<element name = "filter-mapping">
-	<complexType>
-		<sequence>
-			<element ref = "tns:filter-name"/> 
-			<element name = "url-pattern" type = "string"/>
-			<element name = "dispatcher" type = "string"/>
-		</sequence>
-	</complexType>
-</element>
+<xsd:element name="filter-name" type="xsd:string" />
 
-<element name = "filter-name" type = "string"/>
+<xsd:element name="servlet-name" type="xsd:string" />
 
-<element name = "servlet-name" type = "string"/>
-
-<element name = "init-param">
-	<complexType>
-			<sequence>
-			<element name = "param-name" type = "string"/>
-			<element name = "param-value" type = "string"/>
-			</sequence>
-</complexType>
-</element>
-
-
-<element name = "listener">
-	<complexType>
-			<sequence>
-			<element name = "listener-class" type = "string"/>
-			</sequence>
-</complexType>
-</element>
+<xsd:element name="init-param">
+	
+        <xsd:complexType>
+			<xsd:sequence>
+			<xsd:element name="param-name" type="xsd:string" />
+			<xsd:element name="param-value" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+</xsd:element>
 
 
-<element name = "servlet">
-	<complexType>
-		<sequence>
-			<element ref = "tns:servlet-name"/>
-			<element name = "servlet-class" type = "string"/>
-			<element ref = "tns:init-param" minOccurs="0" maxOccurs="unbounded"/> 
-		</sequence>
-	</complexType>
-</element>
-
-<element name = "servlet-mapping">
-	<complexType>
-		<sequence>
-			<element ref = "tns:servlet-name"/>
-			<element name = "url-pattern" type = "string"/>
-		</sequence>
-	</complexType>
-</element>
-
-<element name = "error-page">
-	<complexType>
-		<sequence>
-			<element name = "exception-type" type = "string" minOccurs="0" maxOccurs="1"/>
-			<element name = "error-code" type = "integer" minOccurs="0" maxOccurs="1"/>
-			<element name = "location" type = "string"/>
-		</sequence>
-	</complexType>
-</element>
+<xsd:element name="listener">
+	
+        <xsd:complexType>
+			<xsd:sequence>
+			<xsd:element name="listener-class" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+</xsd:element>
 
 
-<element name = "web-app">
-	<complexType>
-		<choice maxOccurs="unbounded">
-			<element ref = "tns:display-name"/>
-			<element ref = "tns:welcome-file-list"/>
-			<element ref = "tns:filter"/>
-			<element ref = "tns:filter-mapping"/>
-			<element ref = "tns:listener"/>
-			<element ref = "tns:servlet"/>
-			<element ref = "tns:servlet-mapping"/>
-			<element ref = "tns:error-page"/>
-		</choice>
-		<attribute name = "id" type = "string"/>
-		<attribute name = "version" type = "string"/>
-	</complexType>
-</element>
-</schema>
+<xsd:element name="servlet">
+	
+        <xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="servlet-name" />
+			<xsd:element name="servlet-class" type="xsd:string" />
+			<xsd:element ref="init-param" minOccurs="0" maxOccurs="unbounded" /> 
+		</xsd:sequence>
+		</xsd:complexType>
+</xsd:element>
+
+<xsd:element name="servlet-mapping">
+	
+        <xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="servlet-name" />
+			<xsd:element name="url-pattern" type="xsd:string" />
+		</xsd:sequence>
+		</xsd:complexType>
+</xsd:element>
+
+<xsd:element name="error-page">
+	
+        <xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="exception-type" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="error-code" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="location" type="xsd:string" />
+		</xsd:sequence>
+		</xsd:complexType>
+</xsd:element>
+
+
+<xsd:element name="web-app">
+	
+        <xsd:complexType>
+		<xsd:choice maxOccurs="unbounded">
+			<xsd:element ref="display-name" />
+			<xsd:element ref="welcome-file-list" />
+			<xsd:element ref="filter" />
+			<xsd:element ref="filter-mapping" />
+			<xsd:element ref="listener" />
+			<xsd:element ref="servlet" />
+			<xsd:element ref="servlet-mapping" />
+			<xsd:element ref="error-page" />
+		</xsd:choice>
+		<xsd:attribute name="id" type="xsd:string" />
+		<xsd:attribute name="version" type="xsd:string" />
+		</xsd:complexType>
+</xsd:element>
+</xsd:schema>
