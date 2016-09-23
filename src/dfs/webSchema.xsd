@@ -18,7 +18,7 @@
 			<xsd:sequence>
 			<xsd:element ref="filter-name" /> 
 			<xsd:element name="filter-class" type="xsd:string" />
-			<xsd:element ref="init-param" maxOccurs="unbounded" /> 
+			<xsd:element ref="init-param" minOccurs="0" maxOccurs="unbounded" /> 
 			</xsd:sequence>
 		</xsd:complexType>
 </xsd:element>
@@ -28,13 +28,15 @@
         <xsd:complexType>
 			<xsd:sequence>
 			<xsd:element ref="filter-name" /> 
-			<xsd:element name="url-pattern" type="xsd:string" />
+			<xsd:element ref="url-pattern" />
 			<xsd:element name="dispatcher" type="xsd:string" />
 			</xsd:sequence>
 		</xsd:complexType>
 </xsd:element>
 
 <xsd:element name="filter-name" type="xsd:string" />
+
+<xsd:element name="url-pattern" type="xsd:string" />
 
 <xsd:element name="servlet-name" type="xsd:string" />
 
@@ -75,7 +77,7 @@
         <xsd:complexType>
 		<xsd:sequence>
 			<xsd:element ref="servlet-name" />
-			<xsd:element name="url-pattern" type="xsd:string" />
+			<xsd:element ref="url-pattern" />
 		</xsd:sequence>
 		</xsd:complexType>
 </xsd:element>
